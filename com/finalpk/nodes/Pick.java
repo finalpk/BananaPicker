@@ -11,25 +11,31 @@ import org.powerbot.game.api.wrappers.node.SceneObject;
 import com.finalpk.Settings;
 
 public class Pick extends Node {
-	
+
 	@Override
 	public boolean activate() {
 		return Calculations.distanceTo(Settings.plantage) < 15
-				&& !Inventory.isFull()
 				&& Inventory.getCount(Settings.basketsfull) != 23;
 	}
 
 	@Override
 	public void execute() {
-		Settings.status = "Picking Bananas";
-		SceneObject tree = SceneEntities.getNearest(Settings.trees);
-		if (!tree.isOnScreen())
-			Camera.turnTo(tree);
-		tree.interact("Pick");
-		Task.sleep(300, 500);
-		if (Inventory.getCount(Settings.banana) > Settings.current) {
-			Settings.picked = Settings.picked + (Inventory.getCount(Settings.banana) - Settings.current);
-			Settings.current = Inventory.getCount(Settings.banana);
+		if (!Inventory.isFull()) {
+			Settings.status = "Picking Bananas";
+			SceneObject tree = SceneEntities.getNearest(Settings.trees);
+			if (!tree.isOnScreen())
+				Camera.turnTo(tree);
+			tree.interact("Pick");
+			Task.sleep(300, 500);
+			if (Inventory.getCount(Settings.banana) > Settings.current) {
+				Settings.picked = Settings.picked
+						+ (Inventory.getCount(Settings.banana) - Settings.current);
+				Settings.current = Inventory.getCount(Settings.banana);
+			}
+		} else if(Inventory.isFull() && Settings.basket) {
+			Inventory.getItem(Settings.baskets).getWidgetChild().click(true);
+			Settings.current = 0;
+			Task.sleep(300, 500);
 		}
 	}
 }

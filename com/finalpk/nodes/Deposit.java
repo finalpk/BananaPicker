@@ -3,6 +3,8 @@ package com.finalpk.nodes;
 import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Calculations;
+import org.powerbot.game.api.methods.Walking;
+import org.powerbot.game.api.methods.interactive.Players;
 import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.methods.widget.DepositBox;
 
@@ -27,6 +29,14 @@ public class Deposit extends Node {
 			Settings.current = 0;
 			Task.sleep(500);
 			DepositBox.close();
+		}
+		Task.sleep(300, 500);
+		Settings.status = "Walking to Boat";
+		while(!Settings.MusaPoint.contains(Players.getLocal())
+				&& !Inventory.isFull()
+				&& Calculations.distanceTo(Settings.seamen) > 5
+				&& Calculations.distanceTo(Settings.seamen) < 100) {
+			Walking.findPath(Settings.seamen).traverse();
 		}
 	}
 }

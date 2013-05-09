@@ -1,5 +1,6 @@
 package com.finalpk.nodes;
 
+import org.powerbot.core.script.job.Task;
 import org.powerbot.core.script.job.state.Node;
 import org.powerbot.game.api.methods.Calculations;
 import org.powerbot.game.api.methods.Walking;
@@ -17,5 +18,6 @@ public class Castle extends Node {
 	public void execute() {
 		Settings.status = "Banking";
 		Walking.walk(Settings.bank);
+		Task.sleep(1000, 1500);
 	}
 }
