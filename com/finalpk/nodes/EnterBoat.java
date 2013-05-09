@@ -15,9 +15,7 @@ public class EnterBoat extends Node {
 	@Override
 	public boolean activate() {
 		return Calculations.distanceTo(Settings.seamen) < 5
-				&& !Inventory.isFull() && !Widgets.get(1184).validate()
-				&& !Widgets.get(1188).validate()
-				&& !Widgets.get(1191).validate();
+				&& !Inventory.isFull();
 	}
 
 	@Override
