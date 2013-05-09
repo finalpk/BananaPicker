@@ -20,11 +20,7 @@ public class Deposit extends Node {
 	@Override
 	public void execute() {
 		Settings.status = "Banking";
-		if (!DepositBox.isOpen()) {
-			DepositBox.open();
-			Task.sleep(500);
-		}
-		if (DepositBox.isOpen()) {
+		if (DepositBox.open()) {
 			DepositBox.depositInventory();
 			Settings.current = 0;
 			Task.sleep(500);

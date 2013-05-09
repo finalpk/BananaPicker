@@ -14,8 +14,8 @@ public class EnterBoat extends Node {
 
 	@Override
 	public boolean activate() {
-		return Calculations.distanceTo(Settings.seamen) < 5 && !Inventory.isFull()
-				&& !Widgets.get(1184).validate()
+		return Calculations.distanceTo(Settings.seamen) < 5
+				&& !Inventory.isFull() && !Widgets.get(1184).validate()
 				&& !Widgets.get(1188).validate()
 				&& !Widgets.get(1191).validate();
 	}
@@ -26,5 +26,18 @@ public class EnterBoat extends Node {
 		NPC man = NPCs.getNearest(Settings.seaman);
 		man.interact("Pay-fare");
 		Task.sleep(500, 1000);
+		while (Widgets.get(1184).validate() || Widgets.get(1188).validate()
+				|| Widgets.get(1191).validate()) {
+			if (Widgets.get(1184).validate()) {
+				Widgets.get(1184).getChild(18).click(true);
+				Task.sleep(500, 1000);
+			} else if (Widgets.get(1188).validate()) {
+				Widgets.get(1188).getChild(11).click(true);
+				Task.sleep(500, 1000);
+			} else {
+				Widgets.get(1191).getChild(18).click(true);
+				Task.sleep(500, 1000);
+			}
+		}
 	}
 }

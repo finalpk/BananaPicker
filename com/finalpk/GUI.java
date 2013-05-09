@@ -13,12 +13,9 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import org.powerbot.game.api.util.net.GeItem;
 
 import com.finalpk.nodes.AntibanTask;
-import com.finalpk.nodes.Banking;
 import com.finalpk.nodes.CastHomeTeleport;
-import com.finalpk.nodes.Castle;
+import com.finalpk.nodes.CastleWars;
 import com.finalpk.nodes.Deposit;
-import com.finalpk.nodes.Dialogue;
-import com.finalpk.nodes.DuellRing;
 import com.finalpk.nodes.EnterBoat;
 import com.finalpk.nodes.LeaveBoat;
 import com.finalpk.nodes.Pick;
@@ -51,21 +48,16 @@ public class GUI extends JFrame {
 				BananaPicker.provide(new AntibanTask());
 				BananaPicker.provide(new ToggleRun());
 				BananaPicker.provide(new LeaveBoat());
-				BananaPicker.provide(new Dialogue());
 				BananaPicker.provide(new EnterBoat());
 				BananaPicker.provide(new Pick());
 				BananaPicker.provide(new LeaveBoat());
 				if (chckbxBaskets.isSelected() && chckbxRingOfDuelling.isSelected()) {
 					Settings.basket = true;
-					BananaPicker.provide(new Castle());
-					BananaPicker.provide(new Banking());
-					BananaPicker.provide(new DuellRing());
+					BananaPicker.provide(new CastleWars());
 					Settings.price = GeItem.lookup(Settings.baskets).getPrice();
 				} else if (chckbxRingOfDuelling.isSelected()) {
 					Settings.duellring = true;
-					BananaPicker.provide(new Castle());
-					BananaPicker.provide(new Banking());
-					BananaPicker.provide(new DuellRing());
+					BananaPicker.provide(new CastleWars());
 					Settings.price = GeItem.lookup(Settings.banana).getPrice();
 				} else if (!chckbxBaskets.isSelected() && !chckbxRingOfDuelling.isSelected()) {
 					BananaPicker.provide(new CastHomeTeleport());
